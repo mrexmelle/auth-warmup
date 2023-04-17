@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RestController
 @RequestMapping("/accounts")
 class AccountController(
-	private val accountService: AccountService
+	private val service: AccountService
 ) {
     @PostMapping
     fun post(
@@ -18,10 +18,16 @@ class AccountController(
 		: AccountPostResponse {
 			
 		try {
-			accountService.validate(request)
+			service.validate(request)
 		} catch (e: Exception) {
 			return AccountPostResponse(e.message ?: "Unknown error")
 		}
+		
+		service.save(Account(
+			request.phoneNumber,
+			request.name,
+			request.password
+		))
 			
     	return AccountPostResponse("OK")
     }

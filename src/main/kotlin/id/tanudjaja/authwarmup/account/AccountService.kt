@@ -3,7 +3,9 @@ package id.tanudjaja.authwarmup.account
 import org.springframework.stereotype.Service;
 
 @Service
-class AccountService {
+class AccountService(
+	private val repo: AccountRepository
+) {
 	fun validate(
 		request: AccountPostRequest
 	) {
@@ -20,5 +22,11 @@ class AccountService {
         if (!passwordRegex.matches(request.password)) {
             throw Exception("Password invalid")
         } 
+	}
+	
+	fun save(
+		data: Account
+	): Account {
+		return repo.save(data)
 	}
 }

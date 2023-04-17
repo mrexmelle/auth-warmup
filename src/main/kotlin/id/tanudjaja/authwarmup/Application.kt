@@ -5,10 +5,11 @@ import org.springframework.boot.runApplication
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-class AuthWarmupApplication
+class Application
 
 fun main(args: Array<String>) {
-	runApplication<AuthWarmupApplication>(*args)
+	runApplication<Application>(*args)
 }
