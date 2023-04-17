@@ -1,0 +1,7 @@
+
+CREATE TABLE IF NOT EXISTS accounts(
+	phone_number VARCHAR(16) NOT NULL,
+	name VARCHAR(64) NOT NULL,
+	password_hash VARCHAR(64) NOT NULL,
+	CONSTRAINT PK PRIMARY KEY(phone_number)
+);

@@ -1,0 +1,14 @@
+package id.tanudjaja.authwarmup
+
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
+import org.springframework.boot.autoconfigure.domain.EntityScan
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@SpringBootApplication
+class AuthWarmupApplication
+
+fun main(args: Array<String>) {
+	runApplication<AuthWarmupApplication>(*args)
+}

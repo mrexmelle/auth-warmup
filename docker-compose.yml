@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  db:
+    container_name: auth-warmup-db
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=matthew
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=auth
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
