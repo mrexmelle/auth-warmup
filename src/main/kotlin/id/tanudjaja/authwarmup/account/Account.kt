@@ -6,7 +6,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 
 @Entity
-@Table(name="accounts")
+@Table(name = "accounts")
 class Account(
     @Id
     val phoneNumber: String = "",
@@ -15,5 +15,5 @@ class Account(
     val name: String = "",
 
     @Column(nullable = false)
-    val passwordHash: String = ""
+    val passwordHash: String = "",
 )

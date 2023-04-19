@@ -7,13 +7,13 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface AccountRepository : JpaRepository<Account, String> {
-	fun findByPhoneNumber(phoneNumber: String): Account?
+    fun findByPhoneNumber(phoneNumber: String): Account?
 	
-	@Modifying
-	@Query("UPDATE Account a SET a.name = ?1 WHERE a.name = ?2 AND a.phoneNumber = ?3")
-	fun UpdateNameByNameAndPhoneNumber(
-		newName: String,
-		oldName: String,
-		phoneNumber: String
-	): Int
+    @Modifying
+    @Query("UPDATE Account a SET a.name = ?1 WHERE a.name = ?2 AND a.phoneNumber = ?3")
+    fun UpdateNameByNameAndPhoneNumber(
+        newName: String,
+        oldName: String,
+        phoneNumber: String,
+    ): Int
 }
