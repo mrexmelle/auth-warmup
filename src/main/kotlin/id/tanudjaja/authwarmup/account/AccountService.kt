@@ -4,6 +4,7 @@ import java.security.interfaces.RSAPrivateKey
 import java.security.interfaces.RSAPublicKey
 import org.springframework.security.crypto.bcrypt.BCrypt
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 
@@ -39,7 +40,8 @@ class AccountService(
 		return BCrypt.checkpw(password, account.passwordHash)
 	}
 	
-	fun save(
+	@Transactional
+	fun create(
 		request: AccountPostRequest
 	): Account {		
 		return repo.save(Account(
@@ -47,6 +49,24 @@ class AccountService(
 			request.name,
 			BCrypt.hashpw(request.password, BCrypt.gensalt())
 		))
+	}
+	
+	fun retrieveNameByPhoneNumber(
+		phoneNumber: String
+	): String {
+		return repo.findByPhoneNumber(phoneNumber)?.name ?: ""
+	}
+	
+	@Transactional
+	fun updateName(
+		phoneNumber: String,
+		request: AccountPatchNameRequest
+	): Boolean {
+		return repo.UpdateNameByNameAndPhoneNumber(
+			request.new,
+			request.old,
+			phoneNumber
+		) > 0
 	}
 	
 	fun authorize(
@@ -58,5 +78,18 @@ class AccountService(
 			.build()
 			.verify(token)
 			.getSubject()
+	}
+	
+	fun getBearerToken(
+		authorization: String
+	): String {
+		val trimmed = authorization.replace(" ", "")
+		
+    	val type = trimmed.take(6).lowercase()
+		if (type != "bearer") {
+			return ""
+		}
+		
+    	return trimmed.drop(6)
 	}
 }
