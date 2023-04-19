@@ -1,11 +1,17 @@
 package id.tanudjaja.authwarmup.account
 
+import java.security.interfaces.RSAPrivateKey
+import java.security.interfaces.RSAPublicKey
 import org.springframework.security.crypto.bcrypt.BCrypt
 import org.springframework.stereotype.Service
+import com.auth0.jwt.JWT
+import com.auth0.jwt.algorithms.Algorithm
 
 @Service
 class AccountService(
-	private val repo: AccountRepository
+	private val repo: AccountRepository,
+	private val rsaPrivateKey: RSAPrivateKey,
+	private val rsaPublicKey: RSAPublicKey
 ) {
 	fun validate(
 		request: AccountPostRequest
@@ -41,5 +47,16 @@ class AccountService(
 			request.name,
 			BCrypt.hashpw(request.password, BCrypt.gensalt())
 		))
+	}
+	
+	fun authorize(
+		token: String
+	): String {
+		return JWT
+			.require(Algorithm.RSA256(rsaPublicKey, null))
+			.withIssuer("auth-warmup")
+			.build()
+			.verify(token)
+			.getSubject()
 	}
 }

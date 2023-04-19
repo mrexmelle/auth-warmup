@@ -5,17 +5,16 @@ import java.security.interfaces.RSAPublicKey
 import java.time.ZonedDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset;
+import org.springframework.stereotype.Service
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
-import org.springframework.stereotype.Service
 import id.tanudjaja.authwarmup.account.AccountService
 import id.tanudjaja.authwarmup.config.FilePathConfig
 
 @Service
 class SessionService(
 	private val accountService: AccountService,
-	private val rsaPrivateKey: RSAPrivateKey,
-	private val rsaPublicKey: RSAPublicKey
+	private val rsaPrivateKey: RSAPrivateKey
 ) {
 	fun authenticate(
 		request: SessionPostRequest
@@ -29,7 +28,6 @@ class SessionService(
 	fun generateJwt(
 		phoneNumber: String
 	): String {
-		
 		val now = ZonedDateTime.now(ZoneId.of("Asia/Jakarta"))
 		return JWT.create()
 			.withIssuer("auth-warmup")
@@ -37,6 +35,6 @@ class SessionService(
 			.withIssuedAt(now.toInstant())
 			.withNotBefore(now.toInstant())
 			.withExpiresAt(now.plusDays(1).toInstant())
-			.sign(Algorithm.RSA256(rsaPublicKey, rsaPrivateKey))	
+			.sign(Algorithm.RSA256(null, rsaPrivateKey))	
 	}
 }
