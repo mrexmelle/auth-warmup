@@ -17,8 +17,12 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("com.auth0:java-jwt:4.4.0")
 	implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+	implementation("org.bouncycastle:bcpkix-jdk18on:1.73")
+	implementation("org.bouncycastle:bcprov-jdk18on:1.73")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.security:spring-security-crypto")
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")

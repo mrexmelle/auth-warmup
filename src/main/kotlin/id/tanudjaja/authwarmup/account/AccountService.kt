@@ -1,6 +1,7 @@
 package id.tanudjaja.authwarmup.account
 
-import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.bcrypt.BCrypt
+import org.springframework.stereotype.Service
 
 @Service
 class AccountService(
@@ -24,9 +25,21 @@ class AccountService(
         } 
 	}
 	
+	fun authenticate(
+		phoneNumber: String,
+		password: String
+	): Boolean {
+		val account = repo.findByPhoneNumber(phoneNumber) ?: return false
+		return BCrypt.checkpw(password, account.passwordHash)
+	}
+	
 	fun save(
-		data: Account
-	): Account {
-		return repo.save(data)
+		request: AccountPostRequest
+	): Account {		
+		return repo.save(Account(
+			request.phoneNumber,
+			request.name,
+			BCrypt.hashpw(request.password, BCrypt.gensalt())
+		))
 	}
 }
