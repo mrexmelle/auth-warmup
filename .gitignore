@@ -26,6 +26,4 @@ data
 build
 *.DS_Store
 .gradle
-gradle
-gradlew
 gradlew.bat
