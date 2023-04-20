@@ -70,11 +70,18 @@ class AccountController(
         @RequestHeader(HttpHeaders.AUTHORIZATION) authorization: String,
         @RequestBody request: AccountPatchNameRequest,
     ): AccountPatchNameResponse {
+    	if (request.old == request.new) {
+			return AccountPatchNameResponse(
+                request.old,
+                request.new,
+                "Identical old and new names",
+            )
+		}
         val bearerToken = service.getBearerToken(authorization)
         if (bearerToken.isEmpty()) {
             return AccountPatchNameResponse(
                 request.old,
-                request.old,
+                request.new,
                 "Bearer token invalid",
             )
         }
@@ -84,7 +91,7 @@ class AccountController(
         } catch (e: Exception) {
             return AccountPatchNameResponse(
                 request.old,
-                request.old,
+                request.new,
                 e.message ?: "Authorization failed",
             )
         }
@@ -99,7 +106,7 @@ class AccountController(
         } else {
             return AccountPatchNameResponse(
                 request.old,
-                request.old,
+                request.new,
                 "Patching failed",
             )
         }
