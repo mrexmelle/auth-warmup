@@ -45,3 +45,6 @@ If error happens in `core` service due to failure to connect to database, restar
 $ docker compose restart core
 ```
 The failure happens due to `db` service isn't ready when `core` attempts to connect to it.
+
+## Swagger
+While the service is running, the Swagger UI is available on: http://localhost:8080/swagger-ui/index.html
