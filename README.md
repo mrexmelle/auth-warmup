@@ -2,16 +2,8 @@
 
 ## Compiling
 
-### For local environment
-
 ```
-$ gradle -Dspring.profiles.active=local clean build
-```
-
-### For docker environment
-
-```
-$ gradle -Dspring.profiles.active=docked clean build
+$ gradle clean build
 ```
 
 ## Building Docker image
