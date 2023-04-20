@@ -27,7 +27,8 @@ $ docker run \
 	-e POSTGRES_USER=matthew \
 	-e POSTGRES_PASSWORD=123 \
 	-e POSTGRES_DB=auth
-	--restart always
+	--restart always \
+	postgres:15-alpine
 $ gradle -Dspring.profiles.active=local bootRun
 ```
 
