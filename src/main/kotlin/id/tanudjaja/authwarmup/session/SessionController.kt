@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RestController
 class SessionController(
     private val service: SessionService,
 ) {
-	@Operation(
-		summary = "Login by creating a new session",
-		operationId = "SessionController.post")
+    @Operation(
+        summary = "Login by creating a new session",
+        operationId = "SessionController.post",
+    )
     @PostMapping
     fun post(
         @RequestBody request: SessionPostRequest,

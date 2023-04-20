@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController
 class VersionController(
     private val buildProperties: BuildProperties,
 ) {
-	@Operation(
-		summary = "Get the version of the currently running application",
-		operationId = "VersionController.get"
-	)
+    @Operation(
+        summary = "Get the version of the currently running application",
+        operationId = "VersionController.get",
+    )
     @GetMapping
     fun get(): VersionGetResponse {
         return VersionGetResponse(

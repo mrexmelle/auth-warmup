@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController
 class AccountController(
     private val service: AccountService,
 ) {
-	@Operation(
-		summary = "Create new account",
-		operationId = "AccountController.post"
-	)
+    @Operation(
+        summary = "Create new account",
+        operationId = "AccountController.post",
+    )
     @PostMapping
     fun post(
         @RequestBody request: AccountPostRequest,
@@ -36,10 +36,10 @@ class AccountController(
         return AccountPostResponse("OK")
     }
 
-	@Operation(
-		summary = "Get the name of an account",
-		operationId = "AccountController.getName"
-	)
+    @Operation(
+        summary = "Get the name of an account",
+        operationId = "AccountController.getName",
+    )
     @GetMapping("/name")
     fun getName(
         @RequestHeader(HttpHeaders.AUTHORIZATION) authorization: String,
@@ -61,22 +61,22 @@ class AccountController(
         )
     }
 
-	@Operation(
-		summary = "Update the name of an account",
-		operationId = "AccountController.patchName"
-	)
+    @Operation(
+        summary = "Update the name of an account",
+        operationId = "AccountController.patchName",
+    )
     @PatchMapping("/name")
     fun patchName(
         @RequestHeader(HttpHeaders.AUTHORIZATION) authorization: String,
         @RequestBody request: AccountPatchNameRequest,
     ): AccountPatchNameResponse {
-    	if (request.old == request.new) {
-			return AccountPatchNameResponse(
+        if (request.old == request.new) {
+            return AccountPatchNameResponse(
                 request.old,
                 request.new,
                 "Identical old and new names",
             )
-		}
+        }
         val bearerToken = service.getBearerToken(authorization)
         if (bearerToken.isEmpty()) {
             return AccountPatchNameResponse(
