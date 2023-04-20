@@ -8,7 +8,7 @@ spring:
 file-path:
   private-key: ./keys/jwtRS256.key
   public-key: ./keys/jwtRS256.key.pub
-
+  
 ---
 
 spring:

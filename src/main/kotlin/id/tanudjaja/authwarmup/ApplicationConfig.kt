@@ -1,6 +1,8 @@
 package id.tanudjaja.authwarmup
 
 import id.tanudjaja.authwarmup.config.FilePathConfig
+import io.swagger.v3.oas.annotations.info.Info
+import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import org.bouncycastle.asn1.pkcs.PrivateKeyInfo
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo
 import org.bouncycastle.openssl.PEMKeyPair
@@ -13,6 +15,12 @@ import java.security.interfaces.RSAPrivateKey
 import java.security.interfaces.RSAPublicKey
 
 @Configuration
+@OpenAPIDefinition(info = Info(
+	title = "Auth Warmup Project",
+	version = "v0.1.0",
+	description = "A weekend project to refresh about authentication"
+	)
+)
 class ApplicationConfig {
 
     @Bean
