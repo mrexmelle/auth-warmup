@@ -40,4 +40,8 @@ $ docker compose up
 ```
 Note that you cannot alter the docker image in the container registry. Only the owner of the repository is allowed to do so.
 
-
+If error happens in `core` service due to failure to connect to database, restart it:
+```
+$ docker compose restart core
+```
+The failure happens due to `db` service isn't ready when `core` attempts to connect to it.
