@@ -1,13 +1,29 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://db:5432/auth
-    username: matthew
-    password: 123
+  profiles.active: docked
   jpa:
     properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
-    # Hibernate ddl auto (create, create-drop, validate, update)
+    # ddl-auto options: create, create-drop, validate, update
     hibernate.ddl-auto: none
     
 file-path:
   private-key: ./keys/jwtRS256.key
   public-key: ./keys/jwtRS256.key.pub
+
+---
+
+spring:
+  config.activate.on-profile: docked
+  datasource:
+    url: jdbc:postgresql://db:5432/auth
+    username: matthew
+    password: 123
+    
+---
+
+spring:
+  config.activate.on-profile: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/auth
+    username: matthew
+    password: 123
+    
