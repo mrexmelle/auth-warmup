@@ -14,6 +14,15 @@ $ gradle -Dspring.profiles.active=local clean build
 $ gradle -Dspring.profiles.active=docked clean build
 ```
 
+## Building Docker image
+
+Note that only the owner of the repository is allowed to build the image. 
+
+```
+$ docker build -t ghcr.io/mrexmelle/auth-warmup:${VERSION} .
+$ docker push ghcr.io/mrexmelle/auth-warmup:${VERSION}
+```
+
 ## Running
 
 ### For local environment
