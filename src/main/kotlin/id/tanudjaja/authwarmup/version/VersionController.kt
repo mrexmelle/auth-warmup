@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/version")
 class VersionController(
-	private val buildProperties: BuildProperties
+    private val buildProperties: BuildProperties,
 ) {
     @GetMapping
-    fun get(): VersionGetResponse {		
-    	return VersionGetResponse(
-			buildProperties.getVersion()
-		)
+    fun get(): VersionGetResponse {
+        return VersionGetResponse(
+            buildProperties.getVersion(),
+        )
     }
 }
-
