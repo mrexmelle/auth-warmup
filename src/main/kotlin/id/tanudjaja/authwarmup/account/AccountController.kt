@@ -1,5 +1,7 @@
 package id.tanudjaja.authwarmup.account
 
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.HttpHeaders
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -11,9 +13,14 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/accounts")
+@Tag(name = "Account API")
 class AccountController(
     private val service: AccountService,
 ) {
+	@Operation(
+		summary = "Create new account",
+		operationId = "AccountController.post"
+	)
     @PostMapping
     fun post(
         @RequestBody request: AccountPostRequest,
@@ -29,6 +36,10 @@ class AccountController(
         return AccountPostResponse("OK")
     }
 
+	@Operation(
+		summary = "Get the name of an account",
+		operationId = "AccountController.getName"
+	)
     @GetMapping("/name")
     fun getName(
         @RequestHeader(HttpHeaders.AUTHORIZATION) authorization: String,
@@ -50,6 +61,10 @@ class AccountController(
         )
     }
 
+	@Operation(
+		summary = "Update the name of an account",
+		operationId = "AccountController.patchName"
+	)
     @PatchMapping("/name")
     fun patchName(
         @RequestHeader(HttpHeaders.AUTHORIZATION) authorization: String,

@@ -9,6 +9,8 @@ file-path:
   private-key: ./keys/jwtRS256.key
   public-key: ./keys/jwtRS256.key.pub
   
+springdoc.swagger-ui.display-operation-id: true
+  
 ---
 
 spring:
